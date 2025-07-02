@@ -23,10 +23,10 @@ module.exports = {
             })
 
             const response = dataToSave.save();
-            console.log("Response by saving", response);
+            // console.log("Response by saving", response);
             return 1;
         } catch (error) {
-            console.log("Error in saving form", error.message);
+            // console.log("Error in saving form", error.message);
             return 0;
         }
     },
@@ -50,7 +50,7 @@ module.exports = {
             });
 
            const response= await newFile.save();
-            console.log("File uploaded", response)
+            // console.log("File uploaded", response)
             return { success: true, data:response };
         } catch (error) {
             // console.log("Error in saving PDF", error.message);

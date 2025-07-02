@@ -86,7 +86,7 @@ route.post('/getPDF', async(req,res)=>{
     console.log("Getting PDF", req.body)
     try {
         const response = await certificate.fetchPDF(req.body.id);
-        console.log("Res", response.data)
+        // console.log("Res", response.data)
         if(response.status){
             console.log("sending pdf")
             res.contentType('application/pdf');
@@ -97,6 +97,26 @@ route.post('/getPDF', async(req,res)=>{
         }
     } catch (error) {
         console.log("Failed to send PDF",error.message)
+        res.status(500).json({status:"Failed", message:error.message})
+    }
+})
+
+route.get('/getPDF/:id', async(req,res)=>{
+    const id= req.params.id
+    console.log("Getting PDF", id)
+    try {
+        const response = await certificate.fetchPDF(id);
+        // console.log("Res", response.data)
+        if(response.status){
+            console.log("sending pdf")
+            res.contentType('application/pdf');
+            // console.log("Buffer length", response.data.length);
+            res.send(Buffer.from(response.data.pdf.buffer)); 
+        }else{
+            res.status(200).json({status:true, data:null})
+        }
+    } catch (error) {
+        // console.log("Failed to send PDF",error.message)
         res.status(500).json({status:"Failed", message:error.message})
     }
 })
