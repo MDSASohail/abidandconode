@@ -29,12 +29,7 @@ connectMongoDB()
 /* Certificate Start */
 const certificate = require('./Routes/Certificate');
 app.use('/certificate', certificate);
-/* Certificate End */
 
-// app.get('*', async (req, res) => {
-//     // console.log("Da ta ", req.body)
-//     res.send("Hello")
-// })
 
 app.listen(8000, () => {
     console.log("Server running on port 8000")

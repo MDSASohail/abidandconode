@@ -41,7 +41,7 @@ module.exports = {
 
     savePDF: async (req) => {
         // console.log("Ging to save")
-        try {
+        
             const newFile = new PDFSchemma({
                 name: req.file.originalname,
                 pdf: req.file.buffer,
@@ -50,23 +50,14 @@ module.exports = {
             });
 
            const response= await newFile.save();
-            // console.log("File uploaded", response)
             return { success: true, data:response };
-        } catch (error) {
-            // console.log("Error in saving PDF", error.message);
-            return { success: false, error: error.message };
-        }
+        
+        
     },
 
     fetchPDF: async(id) =>{
-        // console.log("Finding pdf", id)
-        try {
-            const response = await PDFSchemma.findOne({userID:id});
-            // console.log("Response is ", response.pdf.buffer)
-            return {status:true, data:response}
-        } catch (error) {
-            return {status:false, message:error.message}
-        }
+        const response = await PDFSchemma.findOne({userID:id});
+        return response;
     },
 
     deletePDF : async(id) =>{
